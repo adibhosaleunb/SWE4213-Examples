@@ -1,5 +1,7 @@
 body {
-background-color: gray;
+    background-color: gray;
+
+    /*TODO 2: Center everything horizontally on the screen (including text) */
 }
 
 h1 {
@@ -15,3 +17,5 @@ border-radius: 23px;
 .p-red {
     color: red;
 }
+
+/* TODO 3: Add style for div so that it contains p. Hint: This should only take one attribute. */

@@ -29,7 +29,7 @@ export default function Form() {
             <InputField label="Name" placeholder="Enter your name..." value={form.name} name="name" onChange={handleChange} />
             {/* TODO: Add input fields for email and phone  */}
             
-            {/* TODO: Add a button with the onSubmit function as its onClick */}
+            {/* TODO: Add the MyButton component with the onSubmit function as its onClick */}
 
         </form>
     );
