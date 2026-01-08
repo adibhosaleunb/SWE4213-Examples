@@ -18,18 +18,18 @@ export default function Form() {
     function onSubmit(e) {
         e.preventDefault();
 
-        // TODO: Log all of the values to the console 
+        // TODO 7: Log all of the values to the console 
 
-        // TODO: Reset the form after submitting it 
+        // TODO 7: Reset the form after submitting it 
 
     }
 
     return (
         <form>
             <InputField label="Name" placeholder="Enter your name..." value={form.name} name="name" onChange={handleChange} />
-            {/* TODO: Add input fields for email and phone  */}
+            {/* TODO 6: Add input fields for email and phone  */}
             
-            {/* TODO: Add the MyButton component with the onSubmit function as its onClick */}
+            {/* TODO 6: Add the MyButton component with the onSubmit function as its onClick */}
 
         </form>
     );
