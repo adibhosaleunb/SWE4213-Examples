@@ -61,3 +61,127 @@ app.listen(port)
 <br>
 
 ## Activity 3.2 - Create Products Endpoint 
+Imagine we are creating a buy and sell application. We probably want an endpoint for `products/`. This might include the following information:
+- id
+- title 
+- price 
+- condition
+- category
+- description
+- seller
+- location
+- isSold 
+- createdAt
+
+Your job is to create an app with two endpoints `/users` and `/products`. 
+
+**Todo 1:** Replace your current `server.js` with the one in this folder. 
+
+**Todo 2:** Create a `/routes` folder. This is where you are going to store your different routes. Copy the `users.js` file into your `/routes` folder. You should be able to access the `/users` endpoints. 
+
+**Todo 3:** Copy the `products.js` file into your `/routes` folder. Your goal is to add the following endpoints.
+
+`GET /products`
+
+<details>
+  <summary>Reveal Answer</summary>
+
+```JS
+router.get("/", (req, res) => {
+    res.json(products);
+});
+```
+</details>
+<br>
+
+`GET /products/:id` 
+
+<details>
+  <summary>Reveal Answer</summary>
+
+```JS
+router.get("/:id", (req, res) => {
+    const id = Number(req.params.id);
+    const product = products.find((p) => p.id === id);
+
+    if (!product) return res.status(404).json({ error: "Product not found" });
+
+    res.json(product);
+});
+```
+</details>
+<br>
+
+`POST /products`
+
+<details>
+  <summary>Reveal Answer</summary>
+
+```JS
+router.post("/", (req, res) => {
+    const { title, price, condition, category, description, seller, location } = req.body;
+
+    if (!title || !price || !condition || !category || !description || !seller || !location) {
+        return res.status(400).json({ error: "All fields are required" });
+    }
+
+    const newProduct = {
+        id: nextId++,
+        title,
+        price,
+        condition,
+        category,
+        description,
+        seller,
+        location,
+        isSold: false,
+        createdAt: new Date().toISOString(),
+    };
+    products.push(newProduct);
+
+    res.status(201).json(newProduct);
+});
+```
+</details>
+<br>
+
+`DELETE /products` 
+
+<details>
+  <summary>Reveal Answer</summary>
+
+```JS
+router.delete("/:id", (req, res) => {
+    const id = Number(req.params.id);
+    const index = products.findIndex((p) => p.id === id);
+
+    if (index === -1) return res.status(404).json({ error: "Product not found" });
+
+    const deleted = products.splice(index, 1)[0];
+    res.json({ message: "Product deleted", deleted });
+});
+```
+</details>
+<br>
+
+**Todo 4:** You can update your `server.js` to serve your new `/products` endpoint. 
+
+<details>
+  <summary>Reveal Answer</summary>
+
+```JS
+const productRouter = require("./routes/products");
+app.use("/products", productRouter);
+```
+</details>
+<br>
+
+**Todo 5:** Test your endpoints with the following curl commands:
+
+- `curl http://localhost:3000/products`
+  
+- `curl http://localhost:3000/products/1`
+- `curl -i -X POST "http://localhost:3000/products" -H "Content-Type: application/json" -d '{"title":"AirPods Pro (2nd Gen)","price":180,"condition":"good","category":"Electronics","description":"Works great. Includes case and extra tips.","seller":"Ethan","location":"Fredericton, NB"}'`
+- `curl -X DELETE http://localhost:3000/products/3`
+
+
