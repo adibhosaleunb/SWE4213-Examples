@@ -9,3 +9,4 @@ secrets.txt
 
 *.DS_Store
 *.class
+Temp/*
