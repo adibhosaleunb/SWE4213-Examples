@@ -41,7 +41,7 @@ The goal of this activity is to get experience building an API with Express.js.
 }
 ```
 
-**Todo 6:** In `server.js` create an express app and return Hello World! when people hit the `/` endpoint. You should serve your api at port 3000.
+**Todo 6:** In `server.js` create an express app and return `Hello World!` when people hit the `/` endpoint. You should serve your api at port 3000.
 
 <details>
   <summary>Reveal Answer</summary>
