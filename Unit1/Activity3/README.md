@@ -185,3 +185,15 @@ app.use("/products", productRouter);
 - `curl -X DELETE http://localhost:3000/products/3`
 
 
+## Activity 3.3 - Write Bruno tests 
+
+**Todo 1:** Open the Bruno collection in the Bruno app. If you haven't yet downloaded it, download it here: 
+
+**Todo 2:** Run the collection for the `/users` endpoint. 
+
+**Todo 3:** Create a subfolder in Activity3/Bruno to write the following tests for your products endpoint:
+
+- `1 - GET products`
+- `2 - GET products by id` 
+- `3 - POST products` 
+- `4 - DELETE product by id`

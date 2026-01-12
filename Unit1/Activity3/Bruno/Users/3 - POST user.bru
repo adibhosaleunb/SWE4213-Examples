@@ -16,7 +16,7 @@ body:json {
 }
 
 tests {
-  const body = res.getBody();          // Bruno parses JSON for you
+  const body = res.getBody();         
   bru.setEnvVar("createdUserId", body.id);
 }
 
