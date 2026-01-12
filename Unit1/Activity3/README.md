@@ -187,7 +187,7 @@ app.use("/products", productRouter);
 
 ## Activity 3.3 - Write Bruno tests 
 
-**Todo 1:** Open the Bruno collection in the Bruno app. If you haven't yet downloaded it, download it here: 
+**Todo 1:** Open the Bruno collection in the Bruno app. If you haven't yet downloaded it, download it here: `https://www.usebruno.com/downloads`
 
 **Todo 2:** Run the collection for the `/users` endpoint. 
 
