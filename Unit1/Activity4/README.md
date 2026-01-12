@@ -1,5 +1,5 @@
 # Activity 4
-The goal of this activity is to teach you about authentication with JWT. Included in this folder is a very simple application that has authentication working.
+The goal of this activity is to teach you about authentication with JWT. Included in this folder is a demo application that has authentication working. Spend some time looking over the code to make sure that you understand how it is working.
 
 **Todo 1:** Run `npm install` to install all of the necessary dependencies. 
 
