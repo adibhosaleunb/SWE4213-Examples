@@ -3,3 +3,11 @@ Here you will find all of the source code for the examples we go through in the 
 
 # Students 
 Ethan Eddy
+
+# Units 
+
+## Unit 1: Web Development
+- HTML, CSS, JS 
+- React 
+- Express.js 
+- PostgreSQL
