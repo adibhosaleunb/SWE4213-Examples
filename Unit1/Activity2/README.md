@@ -45,7 +45,7 @@ export default function MyButton({ onClick }) {
 </details>
 <br>
 
-**Todo 6:** In `Form.jsx` add to more input fields email and phone. Additionally add your MyButton component.
+**Todo 6:** In `Form.jsx` add two more input fields email and phone. Additionally add your MyButton component.
 
 <details>
   <summary>Reveal Answer</summary>
