@@ -8,3 +8,8 @@ services:
     volumes:
       - ./video-streaming/src:/usr/src/app/src
     command: npm run dev
+
+  history:
+    volumes:
+      - ./history/src:/usr/src/app/src
+    command: npm run dev
