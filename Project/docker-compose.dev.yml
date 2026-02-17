@@ -1,0 +1,10 @@
+services:
+  video-storage:
+    volumes:
+      - ./video-storage/src:/usr/src/app/src
+    command: npm run dev
+
+  video-service:
+    volumes:
+      - ./video-streaming/src:/usr/src/app/src
+    command: npm run dev
