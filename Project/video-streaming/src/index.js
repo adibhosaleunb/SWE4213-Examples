@@ -1,6 +1,7 @@
 const express = require("express");
 const { Pool } = require("pg");
 const { Readable } = require("stream");
+const amqp = require("amqplib");
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -11,6 +12,33 @@ const pool = new Pool({
 
 const VIDEO_STORAGE_URL = process.env.VIDEO_STORAGE_URL || "http://localhost:4000";
 const HISTORY_URL = process.env.HISTORY_URL || "http://localhost:5000";
+
+let channel;
+
+async function connectWithRetry(url, retries = 10, delay = 3000) {
+  for (let i = 1; i <= retries; i++) {
+    try {
+      return await amqp.connect(url);
+    } catch (err) {
+      console.log(`RabbitMQ not ready, retrying (${i}/${retries})...`);
+      await new Promise((res) => setTimeout(res, delay));
+    }
+  }
+  throw new Error("Could not connect to RabbitMQ after retries");
+}
+
+async function main() {
+  const connection = await connectWithRetry(process.env.RABBITMQ_URL || "amqp://localhost");
+  channel = await connection.createChannel();
+  await channel.assertQueue("video.viewed", { durable: false });
+  console.log("Connected to RabbitMQ");
+
+  app.listen(port, () => {
+    console.log(`Video service listening on port ${port}`);
+  });
+}
+
+main().catch(console.error);
 
 app.get("/videos/:id/stream", async (req, res) => {
   const result = await pool.query("SELECT * FROM videos WHERE id = $1", [req.params.id]);
@@ -29,7 +57,8 @@ app.get("/videos/:id/stream", async (req, res) => {
 
     if (!req.headers.range) {
       console.log(`Recording view for video ${req.params.id}`);
-      await fetch(`${HISTORY_URL}/videos/${req.params.id}/viewed`, { method: "POST" });
+      channel.sendToQueue("video.viewed", Buffer.from(JSON.stringify({ videoId: parseInt(req.params.id) })));
+      // await fetch(`${HISTORY_URL}/videos/${req.params.id}/viewed`, { method: "POST" });
     } else {
       console.log(`Skipping view for video ${req.params.id} (range request)`);
     }
@@ -64,6 +93,3 @@ app.get("/videos/:id", async (req, res) => {
   res.json({ id: video.id, title: video.title, views });
 });
 
-app.listen(port, () => {
-  console.log(`Video service listening on port ${port}`);
-});
